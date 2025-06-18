@@ -9,28 +9,38 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  Keyboard,
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../Header';
+import {styles} from './Style'
 
 const ChatRoom = ({ route }) => {
-  const { chatId } = route.params;
-  const [messages, setMessages] = useState([
-    { id: '1', text: 'Hola, ¿cómo estás?', from: 'other' },
-    { id: '2', text: 'Todo bien, ¿y tú?', from: 'me' },
-  ]);
+  const { chat } = route.params;
+  const [messages, setMessages] = useState(chat.messages || []);
   const [input, setInput] = useState('');
   const flatListRef = useRef(null);
 
+  // Función para generar la hora actual en formato HH:MM
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
+
   const sendMessage = () => {
     if (input.trim() === '') return;
+
     const newMessage = {
       id: Date.now().toString(),
       text: input,
       from: 'me',
+      time: getCurrentTime(),
     };
+
     setMessages((prev) => [...prev, newMessage]);
     setInput('');
+
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
@@ -38,9 +48,11 @@ const ChatRoom = ({ route }) => {
           id: (Date.now() + 1).toString(),
           text: 'Respuesta automática ✉️',
           from: 'other',
+          time: getCurrentTime(),
         },
       ]);
     }, 1000);
+
     setTimeout(() => {
       flatListRef.current?.scrollToEnd({ animated: true });
     }, 100);
@@ -54,101 +66,51 @@ const ChatRoom = ({ route }) => {
       ]}
     >
       <Text style={styles.messageText}>{item.text}</Text>
+      <Text style={styles.timeText}>{item.time}</Text>
     </View>
   );
 
-return (
-  <SafeAreaView style={{ flex: 1, backgroundColor: '#fff', paddingTop: 60 }}>
-    <Header titulo={'Usuario'} />
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 85} // ⬅️ este valor es clave en Android
-    >
-      <View style={styles.container}>
-        <FlatList
-          ref={flatListRef}
-          data={messages}
-          keyExtractor={(item) => item.id}
-          renderItem={renderMessage}
-          contentContainerStyle={{ padding: 55, paddingBottom: 100 }}
-          keyboardShouldPersistTaps="handled"
-          onContentSizeChange={() =>
-            flatListRef.current?.scrollToEnd({ animated: true })
-          }
-          onLayout={() =>
-            flatListRef.current?.scrollToEnd({ animated: false })
-          }
-        />
-
-        {/* El input está FUERA del scroll y dentro del KeyboardAvoidingView */}
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            value={input}
-            onChangeText={setInput}
-            placeholder="Escribe tu mensaje..."
-            returnKeyType="send"
-            onSubmitEditing={sendMessage}
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <Header titulo={chat.name} />
+      <KeyboardAvoidingView
+        style={styles.keyboardContainer}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 30}
+      >
+        <View style={styles.container}>
+          <FlatList
+            ref={flatListRef}
+            data={messages}
+            keyExtractor={(item) => item.id}
+            renderItem={renderMessage}
+            contentContainerStyle={styles.messagesContainer}
+            keyboardShouldPersistTaps="handled"
+            onContentSizeChange={() =>
+              flatListRef.current?.scrollToEnd({ animated: true })
+            }
+            onLayout={() =>
+              flatListRef.current?.scrollToEnd({ animated: false })
+            }
           />
-          <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
-            <Text style={styles.sendButtonText}>Enviar</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </KeyboardAvoidingView>
-  </SafeAreaView>
-);
 
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              value={input}
+              onChangeText={setInput}
+              placeholder="Escribe tu mensaje..."
+              returnKeyType="send"
+              onSubmitEditing={sendMessage}
+            />
+            <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
+              <Text style={styles.sendButtonText}>Enviar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
 };
 
 export default ChatRoom;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  messageBubble: {
-    padding: 10,
-    borderRadius: 10,
-    marginVertical: 5,
-    maxWidth: '75%',
-  },
-  myMessage: {
-    backgroundColor: '#DCF8C5',
-    alignSelf: 'flex-end',
-  },
-  otherMessage: {
-    backgroundColor: '#E5E5EA',
-    alignSelf: 'flex-start',
-  },
-  messageText: {
-    fontSize: 16,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderTopWidth: 1,
-    borderColor: '#ddd',
-    padding: 10,
-    backgroundColor: '#fff',
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    paddingHorizontal: 10,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 20,
-  },
-  sendButton: {
-    marginLeft: 10,
-    backgroundColor: '#007AFF',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 20,
-  },
-  sendButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-});

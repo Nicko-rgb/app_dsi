@@ -7,14 +7,22 @@ export const styles = StyleSheet.create({
 
 
     // ESTILOS PARA EL CHAT
-   container: {
+    safeArea: {
         flex: 1,
         backgroundColor: '#fff',
+        paddingTop: 50,
+    },
+    keyboardContainer: {
+        flex: 1,
+    },
+    container: {
+        flex: 1,
+        justifyContent: 'space-between',
     },
     messagesContainer: {
+        padding: 15,
+        paddingBottom: 20,
         flexGrow: 1,
-        // justifyContent: 'flex-end',
-        padding: 10,
     },
     messageBubble: {
         padding: 10,
@@ -33,12 +41,18 @@ export const styles = StyleSheet.create({
     messageText: {
         fontSize: 16,
     },
+    timeText: {
+        fontSize: 12,
+        color: '#666',
+        textAlign: 'right',
+        marginTop: 4,
+    },
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 10,
         borderTopWidth: 1,
         borderColor: '#ddd',
+        padding: 10,
         backgroundColor: '#fff',
     },
     input: {
@@ -46,14 +60,14 @@ export const styles = StyleSheet.create({
         height: 40,
         paddingHorizontal: 10,
         backgroundColor: '#f0f0f0',
-        borderRadius: 20,
+        borderRadius: 10,
     },
     sendButton: {
         marginLeft: 10,
         backgroundColor: '#007AFF',
         paddingVertical: 10,
         paddingHorizontal: 15,
-        borderRadius: 20,
+        borderRadius: 10,
     },
     sendButtonText: {
         color: '#fff',
