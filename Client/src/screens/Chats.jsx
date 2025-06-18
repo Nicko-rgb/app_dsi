@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
-const Chats = () => {
+import ChatList from '../components/Chats/ChatList';
+
+const Chats = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Mis Chats</Text>
@@ -10,17 +12,14 @@ const Chats = () => {
                     placeholder="Buscar tus chats..."
                 />
             </View>
-            <Text style={styles.description}>
-                Aquí podrás ver toda tu lista de chats.
-            </Text>
+            <ChatList navigation={navigation} />
         </View>
     );
-};
+};  
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         paddingVertical: 10,
         paddingHorizontal: 20,
         backgroundColor: '#fff',
@@ -40,10 +39,9 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 22,
-        fontWeight: 800,
+        fontWeight: 'bold',
         marginBottom: 10,
         color: '#007AFF',
-        margin: 0,
     },
 });
 
