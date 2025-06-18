@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         marginTop: 60
     },
     tabBar: {
-        height: 80,
+        height: 60,
         flexDirection: 'row',
         borderTopWidth: 1,
         borderColor: '#ddd',
@@ -142,12 +142,13 @@ const styles = StyleSheet.create({
         right: 0,
         left: 0,
         overflow: 'hidden', 
+        borderWidth:1
     },
     tabItem: {
         flex: 1,
         // alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: 10,
+        // paddingBottom: 10,
         // borderWidth: 1,
     },
     iconContainer: {

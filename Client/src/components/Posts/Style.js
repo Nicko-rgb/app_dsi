@@ -44,29 +44,29 @@ export const styles = StyleSheet.create({
     // Contenedor principal para UploadText y UploadFile
     upload: {
         flex: 1, 
-        borderWidth: 2, 
+        // borderWidth: 2, 
         backgroundColor: '#f4f6fa',
-        paddingTop: 100,
+        paddingTop: 60,
     },
     content: {
         padding: 20,
-        // borderWidth: 2,
-        flex: 1
+        flex: 1,
+        // borderWidth: 2
     },
 
     // Estilo para centrar todo el contenido
     upload_center: {
         width: '100%',
-        borderWidth: 1,
+        // borderWidth: 1,
         margin: 'auto',
         alignItems: 'center'
     },
 
     title_upload: {
         fontSize: 20,
-        fontWeight: '700',
+        fontWeight: 800,
         color: colors.color1,
-        marginBottom: 16,
+        marginBottom: 15,
     },
 
     // Fondo degradado con borde redondeado para texto
@@ -74,19 +74,24 @@ export const styles = StyleSheet.create({
         width: '100%',
         borderRadius: 16,
         padding: 12,
-        marginBottom: 16,
+        marginBottom: 5,
         minHeight: 150,
         shadowColor: '#aaa',
         shadowOpacity: 0.2,
         shadowRadius: 4,
         shadowOffset: { width: 0, height: 2 },
         elevation: 3,
+        borderWidth: .4,
+        borderColor: colors.color1,
     },
 
     textarea_upload: {
-        fontSize: 16,
+        fontSize: 18,
+        fontWeight: 700,
         color: '#1c1c1c',
         fontFamily: 'System',
+        marginBottom: 25,
+        // borderWidth: .4
     },
 
     // Botones para agregar o cambiar modo
@@ -94,7 +99,8 @@ export const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 30,
+        justifyContent: 'flex-end',
+        marginBottom: 10,
         gap: 10,
     },
 
@@ -122,7 +128,7 @@ export const styles = StyleSheet.create({
         marginTop: 20,
         width: width * 0.6,
         height: 48,
-        backgroundColor: '#007bff',
+        backgroundColor: colors.color1,
         borderRadius: 24,
         justifyContent: 'center',
         alignItems: 'center',
@@ -138,23 +144,6 @@ export const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#fff',
         letterSpacing: 0.5,
-    },
-
-    // Botón para volver a pedir permisos o cambiar tipo
-    btn_upload: {
-        backgroundColor: '#fff',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 12,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginVertical: 5,
-        flexDirection: 'row',
-        elevation: 2,
-        shadowColor: '#aaa',
-        shadowOpacity: 0.15,
-        shadowRadius: 4,
-        shadowOffset: { width: 0, height: 2 },
     },
 
     note: {
@@ -239,6 +228,7 @@ export const styles = StyleSheet.create({
     },
     media: {
         width: '100%',
+        minWidth: '100%',
     },
     loadingContainer: {
         justifyContent: 'center',
