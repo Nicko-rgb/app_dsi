@@ -19,9 +19,9 @@ const Publicaciones = () => {
         <ScrollView style={styles.container} >
             <Text style={styles.title}>Posts</Text>
             {isAuthenticated && (
-                <TouchableOpacity style={styles.btn_upload} onPress={handleNavUpload} activeOpacity={.6} >
-                    <Text style={styles.txt_upload} >Comparte algo nuevo...</Text>
-                    <Image source={ico1} style={styles.ico_upload} />
+                <TouchableOpacity style={styles.btn_upload_open} onPress={handleNavUpload} activeOpacity={.6} >
+                    <Text style={styles.txt_upload_open} >Comparte algo nuevo...</Text>
+                    <Image source={ico1} style={styles.ico_upload_open} />
                 </TouchableOpacity>
             )}
             <PostCard post={'https://lf-cdn.trae.ai/obj/trae-ai-us/og.jpeg'} />

@@ -10,13 +10,16 @@ import ChatRoom from './src/components/Chats/ChatRoom'
 
 import Upload from './src/Upload';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
     return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
+
+        <SafeAreaProvider>
+            <SafeAreaView style={{ flex: 1 }}>
             <AuthProvider>
                 <NavigationContainer>
                     <Stack.Navigator initialRouteName='Navegador' >
@@ -28,6 +31,7 @@ export default function App() {
                     </Stack.Navigator>
                 </NavigationContainer>
             </AuthProvider>
-        </GestureHandlerRootView>
+            </SafeAreaView>
+        </SafeAreaProvider>
     );
 }

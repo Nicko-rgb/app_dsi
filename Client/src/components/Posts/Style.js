@@ -1,6 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
+const { width, height } = Dimensions.get('window');
 import ConfigStylo from '../../utils/config.style';
-const { width } = Dimensions.get('window');
 
 const { colors } = ConfigStylo();
 
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         margin: 0,
         textAlign: 'center',
     },
-    btn_upload: {
+    btn_upload_open: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -29,93 +29,101 @@ export const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 10
     },
-    txt_upload: {
+    txt_upload_open: {
         fontSize: 16,
         fontWeight: 800,
         marginLeft: 10,
         color: colors.color1,
     },
-    ico_upload: {
+    ico_upload_open: {
         width: 25,
         height: 25,
         tintColor: colors.color1,
     },
     // ====================================================================================
-    // ESTYLOS PARA EL MODAL UPLOAD PUBLIACIONES
+    // Contenedor principal para UploadText y UploadFile
     upload: {
-        flex: 1,
-        backgroundColor: 'white',
+        flex: 1, 
+        borderWidth: 2, 
+        backgroundColor: '#f4f6fa',
+        paddingTop: 100,
     },
-    content:{
-        flex: 1,
-        marginTop: 100,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-    },
-    upload_center: {
-        borderWidth: 1,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
+    content: {
         padding: 20,
-        backgroundColor: '#f7f9fc',
+        // borderWidth: 2,
+        flex: 1
     },
+
+    // Estilo para centrar todo el contenido
+    upload_center: {
+        width: '100%',
+        borderWidth: 1,
+        margin: 'auto',
+        alignItems: 'center'
+    },
+
     title_upload: {
         fontSize: 20,
         fontWeight: '700',
-        color: '#2b2b2b',
+        color: colors.color1,
         marginBottom: 16,
-        alignSelf: 'flex-start',
     },
+
+    // Fondo degradado con borde redondeado para texto
     gradientBackground: {
         width: '100%',
         borderRadius: 16,
         padding: 12,
         marginBottom: 16,
         minHeight: 150,
-        justifyContent: 'flex-start',
-        elevation: 2,
         shadowColor: '#aaa',
         shadowOpacity: 0.2,
-        shadowRadius: 6,
-        shadowOffset: { width: 0, height: 3 },
+        shadowRadius: 4,
+        shadowOffset: { width: 0, height: 2 },
+        elevation: 3,
     },
+
     textarea_upload: {
         fontSize: 16,
-        color: '#1c1c1e',
+        color: '#1c1c1c',
         fontFamily: 'System',
     },
+
+    // Botones para agregar o cambiar modo
     barra_opcion_text: {
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'flex-start',
         alignItems: 'center',
         marginBottom: 30,
         gap: 10,
     },
+
     btn_add: {
-        width: 42,
-        height: 42,
+        width: 44,
+        height: 44,
         backgroundColor: '#fff',
-        borderRadius: 50,
+        borderRadius: 22,
         alignItems: 'center',
         justifyContent: 'center',
-        elevation: 4,
         shadowColor: '#999',
         shadowOpacity: 0.25,
-        shadowRadius: 6,
+        shadowRadius: 5,
         shadowOffset: { width: 0, height: 2 },
+        elevation: 3,
     },
+
     ico_add: {
         width: 22,
         height: 22,
         resizeMode: 'contain',
     },
+
     btn_postear: {
+        marginTop: 20,
         width: width * 0.6,
-        height: 50,
+        height: 48,
         backgroundColor: '#007bff',
-        borderRadius: 25,
+        borderRadius: 24,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 3,
@@ -124,11 +132,60 @@ export const styles = StyleSheet.create({
         shadowRadius: 4,
         shadowOffset: { width: 0, height: 3 },
     },
+
     txt_postear: {
         fontSize: 16,
         fontWeight: '600',
         color: '#fff',
         letterSpacing: 0.5,
+    },
+
+    // Botón para volver a pedir permisos o cambiar tipo
+    btn_upload: {
+        backgroundColor: '#fff',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 12,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 5,
+        flexDirection: 'row',
+        elevation: 2,
+        shadowColor: '#aaa',
+        shadowOpacity: 0.15,
+        shadowRadius: 4,
+        shadowOffset: { width: 0, height: 2 },
+    },
+
+    note: {
+        color: '#444',
+        fontSize: 14,
+        fontWeight: '500',
+    },
+
+    ico_upload: {
+        width: 20,
+        height: 20,
+        marginLeft: 8,
+        tintColor: '#007bff',
+    },
+
+    // Preview de imagen/video
+    preview_container: {
+        marginVertical: 10,
+        alignItems: 'center',
+    },
+
+    preview_image: {
+        width: width - 40,
+        height: 250,
+        borderRadius: 12,
+        resizeMode: 'cover',
+    },
+
+    preview_video: {
+        width: width - 40,
+        height: 250,
     },
     // ====================================================================================
     // ESTYLOS PARA LA CARD DE PUBLICACIONES

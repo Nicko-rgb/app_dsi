@@ -62,13 +62,14 @@ const Header = ({ titulo }) => {
 
 const styles = StyleSheet.create({
     footer: {
-        height: 100,
-        paddingTop: 40,
+        height: 60,
+        // paddingTop: 40,
         paddingLeft: 20,
         paddingRight: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        // borderWidth: 1,
 
         backgroundColor: 'white',
         shadowColor: '#000',

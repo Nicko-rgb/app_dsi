@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     screenContainer: {
         flex: 1,
         // borderWidth: 3,
-        marginTop: 100
+        marginTop: 60
     },
     tabBar: {
         height: 80,
