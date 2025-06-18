@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { styles } from './components/Posts/Style';
 
 import useStorePost from './components/Posts/useStorePost';
@@ -12,12 +12,15 @@ const Upload = () => {
     const { visibleTypeUpload } = useStorePost();
 
     return (
-        <View style={styles.upload}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.upload}
+        >
             <Header titulo={'Crear Publicación'} />
-            <ScrollView contentContainerStyle={styles.content} >
+            <View style={styles.content} >
                 {visibleTypeUpload === 'text' ? <UploadText /> : <UploadFile />}
-            </ScrollView>
-        </View>
+            </View>
+        </KeyboardAvoidingView>
     );
 };
 
