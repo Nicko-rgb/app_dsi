@@ -24,8 +24,8 @@ const Publicaciones = () => {
                     <Image source={ico1} style={styles.ico_upload_open} />
                 </TouchableOpacity>
             )}
-            <PostCard post={'https://lf-cdn.trae.ai/obj/trae-ai-us/og.jpeg'} />
-            <PostCard post={'https://www.marketing-empresas.com/wp-content/uploads/2018/04/MERKAWEBS-Dise%C3%B1o-grafico.jpg'} />
+            <PostCard post={'http://192.168.220.190:5051/media/posts/post.png'} />
+            <PostCard post={'http://192.168.220.190:5051/media/posts/img2.png'} />
             <PostCard post={'https://res.cloudinary.com/dq2ug36ri/image/upload/fotooo1_zbezsr.jpg'} />
             <PostCard post={'https://blog.manzanaverde.la/wp-content/uploads/2022/07/Frutas-que-puedes-comer-en-invierno.png'} />
         </ScrollView>
