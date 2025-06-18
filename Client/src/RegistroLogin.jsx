@@ -51,6 +51,8 @@ const RegistroLogin = () => {
                 <ScrollView
                     contentContainerStyle={styles.scrollContent}
                     keyboardShouldPersistTaps="handled"
+                    keyboardDismissMode="on-drag"
+                    showsVerticalScrollIndicator={true}
                 >
                     <View style={styles.center}>
                         <Text style={styles.title}>{title}</Text>
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        marginTop: 120
+        paddingTop: 120,
     },
     center: {
         margin: 'auto',

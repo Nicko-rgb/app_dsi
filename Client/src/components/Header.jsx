@@ -6,11 +6,11 @@ import noti from '../assets/icons/notification.png'
 import back from '../assets/icons/back.png'
 import { useAuth } from '../context/AuthContext';
 
-const Header = () => {
+const Header = ({ titulo }) => {
     const navigation = useNavigation(); // Hook para navegar
     const route = useRoute();
     const [titleName, setTitleName] = useState('');
-    const { isAuthenticated } = useAuth()
+    const { isAuthenticated } = useAuth();
 
     useEffect(() => {
         if (route.name === 'Perfil') {
@@ -22,22 +22,30 @@ const Header = () => {
         }
     }, [route.name]);
 
+    const handleCloseback = () => {
+        navigation.goBack();
+    }
+
+    const handleNavigateperfil = () => {
+        navigation.navigate('Perfil');
+    }
+
     return (
         <View style={styles.footer}>
             <View style={styles.left}>
                 {route.name !== 'Navegador' && (
-                    <TouchableOpacity style={styles.back} onPress={() => navigation.navigate('Navegador')}>
+                    <TouchableOpacity style={styles.back} onPress={handleCloseback}>
                         <Image source={back} style={styles.backIco} />
                     </TouchableOpacity>
                 )}
-                <Text style={styles.logoText}>{titleName}</Text>
+                <Text style={styles.logoText}>{ titulo ? titulo : titleName}</Text>
             </View>
             {isAuthenticated ? (
                 <View style={styles.right}>
                     <View style={styles.ico}>
                         <Image style={styles.img} source={noti} />
                     </View>
-                    <TouchableOpacity style={styles.ico} onPress={() => navigation.navigate('Perfil')}>
+                    <TouchableOpacity style={styles.ico} onPress={handleNavigateperfil}>
                         <Image style={styles.img} source={userIco} />
                     </TouchableOpacity>
                 </View>

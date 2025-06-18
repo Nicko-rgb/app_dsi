@@ -6,6 +6,9 @@ import { AuthProvider } from './src/context/AuthContext';
 import Views from './src/Views';
 import Perfil from './src/Perfil';
 import RegistroLogin from './src/RegistroLogin';
+import ChatRoom from './src/components/Chats/ChatRoom'
+
+import Upload from './src/Upload';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-gesture-handler';
 
@@ -20,6 +23,8 @@ export default function App() {
                         <Stack.Screen name='Navegador' component={Views} options={{ headerShown: false }} />
                         <Stack.Screen name='Perfil' component={Perfil} options={{headerShown: false }}/>
                         <Stack.Screen name='RegistroLogin' component={RegistroLogin} options={{headerShown: false}} />
+                        <Stack.Screen name="ChatRoom" component={ChatRoom} options={{ title: 'Chat', headerShown: false }} />
+                        <Stack.Screen name='Upload' component={Upload} options={{headerShown: false}} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </AuthProvider>

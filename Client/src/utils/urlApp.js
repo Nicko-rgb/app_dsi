@@ -1,7 +1,7 @@
 
 const urlApp = () => {
   
-    const apiUrl = 'http://192.168.220.190:5051'
+    const apiUrl = 'http://192.168.220.182:5051'
     
     return { apiUrl }
 }
