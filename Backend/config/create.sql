@@ -1,8 +1,8 @@
--- Active: 1743786824105@@127.0.0.1@3306@miapp
-CREATE DATABASE miapp
+-- Active: 1733845747041@@127.0.0.1@3306@dbdsiapp
+CREATE DATABASE dbDsiApp
     DEFAULT CHARACTER SET = 'utf8mb4';
     
-USE miapp;
+USE dbDsiApp;
 
 CREATE TABLE users (
     id_user INT AUTO_INCREMENT PRIMARY KEY,
