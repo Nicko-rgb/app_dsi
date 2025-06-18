@@ -12,7 +12,10 @@ const Chats = ({ navigation }) => {
                     placeholder="Buscar tus chats..."
                 />
             </View>
+            <View style= {styles.chatListContain}>
             <ChatList navigation={navigation} />
+
+            </View>
         </View>
     );
 };  
@@ -43,6 +46,10 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         color: '#007AFF',
     },
+    chatListContain: {
+        flex: 1,
+        padding: 3
+    }
 });
 
 export default Chats;

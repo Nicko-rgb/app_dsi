@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         right: 0,
         left: 0,
         overflow: 'hidden', 
-        borderWidth:1
+        // borderWidth: 1
     },
     tabItem: {
         flex: 1,
