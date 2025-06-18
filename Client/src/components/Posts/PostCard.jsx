@@ -9,7 +9,7 @@ import icoComent from '../../assets/icons/chat.png';
 import { styles } from './Style';
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
-const MAX_POST_HEIGHT = SCREEN_HEIGHT * 0.8;
+const MAX_POST_HEIGHT = SCREEN_HEIGHT * 0.7;
 const MIN_POST_HEIGHT = SCREEN_HEIGHT * 0.1;
 
 const PostCard = ({ isPerfil, data, post }) => {

@@ -1,15 +1,17 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react'; // agrega useState
 import { View, Text, TouchableOpacity, Image, TextInput, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './Style';
 import img_add from '../../assets/icons/img_add.png';
 import paleta from '../../assets/icons/paleta_colors.png';
+import urlApp from '../../utils/urlApp';
 
 import useStorePost from './useStorePost';
 const UploadText = () => {
+    const {apiUrl} = urlApp()
 
     const { selectedColor, setSelectedColor, showPalette, togglePalette, colorsPalette, setVisibleTypeUpload } = useStorePost();
-
+    const [texto, setTexto] = useState('');
     // Asegura que selectedColor.value sea siempre un array válido para LinearGradient
     const safeColors = Array.isArray(selectedColor.value)
         ? selectedColor.value
@@ -26,11 +28,45 @@ const UploadText = () => {
         }).start();
     }, [showPalette]);
 
+    const handlePostear = async () => {
+        if (!texto.trim()) return alert('El texto no puede estar vacío');
+
+        try {
+            const response = await fetch(`${apiUrl}/api/posts/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id_user: 1, // reemplaza con el ID del usuario real
+                    texto,
+                    descripcion: '',
+                    media_type: null
+                }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert('Post registrado con éxito');
+                setTexto('');
+            } else {
+                console.error(data);
+                alert('Error al registrar post');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Error de red');
+        }
+    };
+
+
     return (
         <View style={styles.upload_center}>
             <Text style={styles.title_upload}>Escribe tu publicación</Text>
             <LinearGradient colors={safeColors} style={styles.gradientBackground}>
                 <TextInput
+                    value={texto}
+                    onChangeText={setTexto}
                     style={[styles.textarea_upload, { backgroundColor: 'transparent' }]}
                     multiline
                     numberOfLines={6}
@@ -55,7 +91,7 @@ const UploadText = () => {
                             {
                                 transform: [{ translateX: slideAnim }],
                                 position: 'absolute',
-                                top: -60,
+                                top: -50,
                                 right: 15,
                                 flexDirection: 'row',
                             }
@@ -94,9 +130,10 @@ const UploadText = () => {
                 )}
             </View>
 
-            <TouchableOpacity style={styles.btn_postear} activeOpacity={.8} >
+            <TouchableOpacity style={styles.btn_postear} activeOpacity={.8} onPress={handlePostear}>
                 <Text style={styles.txt_postear}>Postear</Text>
             </TouchableOpacity>
+
         </View>
     )
 }
