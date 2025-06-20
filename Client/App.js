@@ -28,7 +28,6 @@ export default function App() {
                         <Stack.Screen name='RegistroLogin' component={RegistroLogin} options={{headerShown: false}} />
                         <Stack.Screen name="ChatRoom" component={ChatRoom} options={{ title: 'Chat', headerShown: false }} />
                         <Stack.Screen name='Upload' component={Upload} options={{headerShown: false}} />
-                        <Stack.Screen name='Upload' component={Upload} options={{headerShown: false}} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </AuthProvider>

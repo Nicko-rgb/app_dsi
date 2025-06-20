@@ -18,10 +18,10 @@ CREATE TABLE users (
 CREATE TABLE posts (
     id_post INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT NOT NULL,
+    tipo ENUM('texto', 'imagen', 'video') NOT NULL,
     texto TEXT NULL, -- post solo texto
-    text_fondo VARCHAR,
+    fondos_text JSON NULL,
     media_path VARCHAR(255) NULL, -- ruta al archivo multimedia (imagen/video)
-    media_type ENUM('imagen', 'video') NULL,
     descripcion TEXT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE

@@ -4,23 +4,33 @@ const { pool } = require('../config/db');
 
 // Crear post
 const createPost = async (req, res) => {
-    const { id_user, texto, descripcion, media_type } = req.body;
-    const file = req.files?.file;
+    const { id_user, texto, descripcion, media_type, fondos_text } = req.body;
+    let media_path = null;
 
     try {
-        let media_path = null;
+        // Si hay archivo subido con multer, accede desde req.file
+        if (req.file) {
+            media_path = `/media/posts/${req.file.filename}`;
+        }
 
-        if (file) {
-            const filename = Date.now() + '-' + file.name;
-            const uploadPath = path.join(__dirname, '../files/posts', filename);
-            await file.mv(uploadPath);
-            media_path = `/media/posts/${filename}`;
+        // Parsear fondos_text si viene como string
+        let fondosJson = null;
+        if (fondos_text) {
+            fondosJson = typeof fondos_text === 'string' ? JSON.parse(fondos_text) : fondos_text;
         }
 
         await pool.execute(
-            `INSERT INTO posts (id_user, texto, descripcion, media_path, media_type)
-             VALUES (?, ?, ?, ?, ?)`,
-            [id_user, texto || null, descripcion || null, media_path, media_type || null]
+            `INSERT INTO posts (id_user, tipo, texto, fondos_text, descripcion, media_path, media_type)
+             VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [
+                id_user,
+                media_type ? media_type : 'texto',
+                texto || null,
+                fondosJson ? JSON.stringify(fondosJson) : null,
+                descripcion || null,
+                media_path,
+                media_type || null
+            ]
         );
 
         res.json({ message: 'Post creado correctamente' });
