@@ -11,7 +11,7 @@ const app = express();
 
 // Middlewares
 app.use(cors({ credentials: true, origin: true }));
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(fileUpload());
 

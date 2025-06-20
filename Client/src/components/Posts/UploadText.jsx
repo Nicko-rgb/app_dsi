@@ -5,13 +5,15 @@ import { styles } from './Style';
 import img_add from '../../assets/icons/img_add.png';
 import paleta from '../../assets/icons/paleta_colors.png';
 import urlApp from '../../utils/urlApp';
+import { useAuth } from '../../context/AuthContext'
 
 import useStorePost from './useStorePost';
 const UploadText = () => {
-    const {apiUrl} = urlApp()
+    const { apiUrl } = urlApp();
+    const { user } = useAuth();
 
-    const { selectedColor, setSelectedColor, showPalette, togglePalette, colorsPalette, setVisibleTypeUpload } = useStorePost();
-    const [texto, setTexto] = useState('');
+    const { texto, setTexto, selectedColor, showPalette, togglePalette, colorsPalette, setVisibleTypeUpload, handlePostearTexto } = useStorePost();
+
     // Asegura que selectedColor.value sea siempre un array válido para LinearGradient
     const safeColors = Array.isArray(selectedColor.value)
         ? selectedColor.value
@@ -28,35 +30,12 @@ const UploadText = () => {
         }).start();
     }, [showPalette]);
 
-    const handlePostear = async () => {
-        if (!texto.trim()) return alert('El texto no puede estar vacío');
-
-        try {
-            const response = await fetch(`${apiUrl}/api/posts/create`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id_user: 1, // reemplaza con el ID del usuario real
-                    texto,
-                    descripcion: '',
-                    media_type: null
-                }),
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-                alert('Post registrado con éxito');
-                setTexto('');
-            } else {
-                console.error(data);
-                alert('Error al registrar post');
-            }
-        } catch (error) {
-            console.error(error);
-            alert('Error de red');
-        }
+    const handlePost = () => {
+        handlePostearTexto(
+            user.id_user,
+            () => alert('Post registrado con éxito'),
+            (msg) => alert(msg)
+        );
     };
 
 
@@ -130,7 +109,7 @@ const UploadText = () => {
                 )}
             </View>
 
-            <TouchableOpacity style={styles.btn_postear} activeOpacity={.8} onPress={handlePostear}>
+            <TouchableOpacity style={styles.btn_postear} activeOpacity={.8} onPress={handlePost}>
                 <Text style={styles.txt_postear}>Postear</Text>
             </TouchableOpacity>
 
